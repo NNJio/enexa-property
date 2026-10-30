@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { K2D } from "next/font/google";
 import { cookies, headers } from "next/headers";
+import { MotionShell } from "@/components/motion-shell";
 import { PrefsProvider } from "@/components/prefs";
 import type { Lang } from "@/i18n";
 import "./globals.css";
@@ -11,7 +12,7 @@ const k2d = K2D({
   display: "swap",
 });
 
-const themeBoot = `(function(){try{var s=localStorage.getItem("enexa-theme");var t=s==="dark"||s==="light"?s:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t;}catch(e){}})();`;
+const themeBoot = `(function(){var d=document.documentElement;try{var s=localStorage.getItem("enexa-theme");var t=s==="dark"||s==="light"?s:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";d.dataset.theme=t;}catch(e){}try{var calm=matchMedia("(prefers-reduced-motion: reduce)").matches;d.dataset.intro=calm||sessionStorage.getItem("enexa-intro")?"done":"play";}catch(e){d.dataset.intro="done";}})();`;
 
 export const metadata: Metadata = {
   title: {
@@ -44,7 +45,9 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     <html lang={lang} className={k2d.className} suppressHydrationWarning>
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeBoot }} />
-        <PrefsProvider initialLang={lang}>{children}</PrefsProvider>
+        <PrefsProvider initialLang={lang}>
+          <MotionShell>{children}</MotionShell>
+        </PrefsProvider>
       </body>
     </html>
   );

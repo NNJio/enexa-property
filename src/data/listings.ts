@@ -27,7 +27,7 @@ export type Listing = {
     src: string;
     alt: Record<Lang, string>;
     caption: Record<Lang, string>;
-    fit?: "contain";
+    focus?: string;
   }[];
 };
 
@@ -95,7 +95,7 @@ export const listings: Listing[] = [
           th: "มุมสูง ติดถนนด้านหนอง",
           en: "Aerial view, beside the pond road",
         },
-        fit: "contain",
+        focus: "35% 50%",
       },
       {
         src: "/photos/furrow.jpg",
