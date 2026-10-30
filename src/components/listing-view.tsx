@@ -141,6 +141,7 @@ export function ListingView({ listing }: { listing: Listing }) {
 
         <section className="contact">
           <h2>{t.visit}</h2>
+          <p className="who">{site.ownerName}</p>
           <p>{t.visitBody}</p>
           <div className="actions">
             <a className="solid" href={mapsUrl(listing)}>
@@ -148,11 +149,11 @@ export function ListingView({ listing }: { listing: Listing }) {
             </a>
             {site.lineId ? (
               <a className="solid" href={`https://line.me/ti/p/~${site.lineId}`}>
-                {t.line}
+                {t.line} · {site.lineId}
               </a>
             ) : null}
             {site.phone ? (
-              <a href={`tel:${phoneHref}`}>
+              <a className="solid" href={`tel:+66${phoneHref.slice(1)}`}>
                 {t.call} {site.phone}
               </a>
             ) : null}

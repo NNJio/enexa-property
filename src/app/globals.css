@@ -258,6 +258,13 @@ h2 {
   border-top: 1px solid var(--line);
 }
 
+.contact .who {
+  margin: 0.85rem 0 0;
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
 .contact p {
   max-width: 28rem;
   margin: 0.7rem 0 0;

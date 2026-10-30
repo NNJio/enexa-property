@@ -1,5 +1,6 @@
 export const site = {
   name: "Enexa",
-  lineId: "",
-  phone: "",
+  ownerName: "พัสกร (นิว)",
+  lineId: "immortalnew",
+  phone: "091-404-1144",
 };
