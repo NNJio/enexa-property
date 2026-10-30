@@ -27,6 +27,7 @@ export type Listing = {
     src: string;
     alt: Record<Lang, string>;
     caption: Record<Lang, string>;
+    fit?: "contain";
   }[];
 };
 
@@ -84,6 +85,18 @@ export const listings: Listing[] = [
       },
     },
     photos: [
+      {
+        src: "/photos/aerial.jpg",
+        alt: {
+          th: "มุมสูงของที่นา ติดถนนด้านหนองชะเลียง",
+          en: "Aerial view of the rice field beside the road along Nong Chaliang",
+        },
+        caption: {
+          th: "มุมสูง ติดถนนด้านหนอง",
+          en: "Aerial view, beside the pond road",
+        },
+        fit: "contain",
+      },
       {
         src: "/photos/furrow.jpg",
         alt: {
@@ -156,23 +169,4 @@ export function mapsUrl(listing: Listing) {
 
 export function mapsEmbed(listing: Listing) {
   return `https://maps.google.com/maps?q=${listing.lat},${listing.lng}&t=k&z=16&output=embed`;
-}
-
-export function inquiryText(listing: Listing, lang: Lang) {
-  const copy = listing.text[lang];
-  const price = formatBaht(listing.pricePerRai);
-  if (lang === "en") {
-    return [
-      `Interested in ${copy.title}`,
-      copy.location,
-      `${copy.sale}, ${price} baht per rai`,
-      `Coordinates ${listing.lat}, ${listing.lng}`,
-    ].join("\n");
-  }
-  return [
-    `สนใจ${copy.title}`,
-    copy.location,
-    `${copy.sale} ไร่ละ ${price} บาท`,
-    `พิกัด ${listing.lat}, ${listing.lng}`,
-  ].join("\n");
 }

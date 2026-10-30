@@ -1,15 +1,13 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useDocumentTitle } from "@/components/use-document-title";
 import { Controls } from "@/components/controls";
-import { CopyButton } from "@/components/copy-button";
+import { Slideshow } from "@/components/slideshow";
 import { usePrefs } from "@/components/prefs";
 import {
   formatArea,
   formatBaht,
-  inquiryText,
   mapsEmbed,
   mapsUrl,
   totalBaht,
@@ -29,15 +27,12 @@ export function ListingView({ listing }: { listing: Listing }) {
   return (
     <article className="sheet">
       <figure className="plate">
-        <div className="plate-media">
-          <Image
-            src={listing.photos[0].src}
-            alt={listing.photos[0].alt[lang]}
-            fill
-            priority
-            sizes="(max-width: 800px) 100vw, 48vw"
-          />
-        </div>
+        <Slideshow
+          photos={listing.photos}
+          lang={lang}
+          prevLabel={t.prev}
+          nextLabel={t.next}
+        />
         <Link className="brand" href="/">
           {site.name}
         </Link>
@@ -99,20 +94,6 @@ export function ListingView({ listing }: { listing: Listing }) {
           ))}
         </div>
 
-        <div className="pair">
-          {listing.photos.slice(1).map((photo) => (
-            <figure key={photo.src}>
-              <Image
-                src={photo.src}
-                alt={photo.alt[lang]}
-                fill
-                sizes="(max-width: 800px) 100vw, 26vw"
-              />
-              <figcaption>{photo.caption[lang]}</figcaption>
-            </figure>
-          ))}
-        </div>
-
         <div className="block approach">
           <h2>{t.directions}</h2>
           <dl className="specs">
@@ -148,7 +129,7 @@ export function ListingView({ listing }: { listing: Listing }) {
               {t.openMap}
             </a>
             {site.lineId ? (
-              <a className="solid" href={`https://line.me/ti/p/~${site.lineId}`}>
+              <a className="line" href={`https://line.me/ti/p/~${site.lineId}`}>
                 {t.line} · {site.lineId}
               </a>
             ) : null}
@@ -157,11 +138,6 @@ export function ListingView({ listing }: { listing: Listing }) {
                 {t.call} {site.phone}
               </a>
             ) : null}
-            <CopyButton
-              text={inquiryText(listing, lang)}
-              label={t.copy}
-              copiedLabel={t.copied}
-            />
           </div>
         </section>
       </div>
